@@ -1,0 +1,604 @@
+/* =============================================
+   FRUTIGER AERO — Adam Zajac Personal Page
+   Windows 7 Glass + Aqua Nature Aesthetic
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap');
+
+/* ===== CSS Variables ===== */
+:root {
+    --aero-blue: #00aaff;
+    --aero-teal: #00d4b4;
+    --aero-sky: #87ceeb;
+    --aero-deep: #005fa3;
+    --aero-green: #5dc865;
+    --glass-bg: rgba(255, 255, 255, 0.18);
+    --glass-border: rgba(255, 255, 255, 0.45);
+    --glass-shadow: rgba(0, 120, 200, 0.25);
+    --text-dark: #003050;
+    --text-light: #e8f6ff;
+    --win7-shine: rgba(255, 255, 255, 0.65);
+}
+
+/* ===== Base / Body ===== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', 'Inter', Arial, sans-serif;
+    color: var(--text-dark);
+    min-height: 100vh;
+    margin: 0;
+    padding: 40px 20px 80px;
+    overflow-x: hidden;
+
+    /* Frutiger Aero nature-sky gradient background */
+    background: url('images/landscape-bg.jpg.jpg') no-repeat center center fixed;
+    background-size: cover;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Soft animated light orbs (Aero ambiance) */
+body::before,
+body::after {
+    content: '';
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(80px);
+    opacity: 0.45;
+    animation: aeroOrb 8s ease-in-out infinite alternate;
+}
+
+body::before {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, #00d4ff 0%, #0077cc 60%, transparent 100%);
+    top: -100px;
+    left: -100px;
+}
+
+body::after {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, #5de8a0 0%, #00b388 60%, transparent 100%);
+    bottom: -80px;
+    right: -80px;
+    animation-delay: 4s;
+}
+
+@keyframes aeroOrb {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        transform: translate(40px, 30px) scale(1.15);
+    }
+}
+
+/* ===== Everything above z-index 0 ===== */
+#about,
+.floating-boxes-container,
+.folklor-section {
+    position: relative;
+    z-index: 1;
+}
+
+/* ===== About Section ===== */
+#about {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 60px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* ===== Profile Picture — Aero Glow Ring ===== */
+#gradient-border {
+    position: relative;
+    width: 255px;
+    height: 255px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Aero glass ring */
+    background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.9) 0%, rgba(135, 206, 250, 0.6) 40%, rgba(0, 120, 200, 0.4) 100%);
+    box-shadow:
+        0 0 0 3px rgba(255, 255, 255, 0.7),
+        0 0 20px rgba(0, 170, 255, 0.6),
+        0 0 50px rgba(0, 200, 220, 0.35),
+        inset 0 2px 4px rgba(255, 255, 255, 0.8);
+    animation: aeroRingPulse 3s ease-in-out infinite;
+}
+
+@keyframes aeroRingPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.7), 0 0 20px rgba(0, 170, 255, 0.6), 0 0 50px rgba(0, 200, 220, 0.35), inset 0 2px 4px rgba(255, 255, 255, 0.8);
+    }
+
+    50% {
+        box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.9), 0 0 35px rgba(0, 170, 255, 0.9), 0 0 70px rgba(0, 200, 220, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.8);
+    }
+}
+
+#gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: -5px;
+    border-radius: 50%;
+    background: conic-gradient(from 180deg,
+            #00aaff, #00e5d4, #5dc865, #00aaff);
+    filter: blur(5px);
+    z-index: -1;
+    animation: spin 5s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#gradient-border img {
+    width: 232px !important;
+    height: 232px !important;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.85);
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== Windows 7 Text Bubble (Bio + Floating Boxes) ===== */
+/* Mimics the W7 taskbar/tooltip glass style:
+   white-shine top half, translucent frosted glass body */
+.bio,
+.floating-box {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+
+    /* Layered glass */
+    background: url('images/notepad-bg.png.png') no-repeat center center;
+    background-size: 100% 100%;
+
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    border-bottom-color: rgba(100, 180, 230, 0.55);
+    border-right-color: rgba(100, 180, 230, 0.45);
+
+    box-shadow:
+        0 2px 0 rgba(255, 255, 255, 0.9) inset,
+        /* top shine line */
+        0 -1px 0 rgba(100, 180, 230, 0.4) inset,
+        /* bottom inner shadow */
+        0 6px 20px rgba(0, 100, 180, 0.25),
+        0 2px 6px rgba(0, 0, 0, 0.12),
+        0 0 0 1px rgba(255, 255, 255, 0.35);
+
+    backdrop-filter: blur(16px) saturate(1.6);
+    -webkit-backdrop-filter: blur(16px) saturate(1.6);
+
+    color: #00263d;
+}
+
+/* The "shine" sweep — W7 glass highlight */
+.bio::before,
+.floating-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.75) 0%,
+            rgba(255, 255, 255, 0.2) 100%);
+    border-radius: 14px 14px 0 0;
+    pointer-events: none;
+}
+
+/* Bio specifics */
+.bio {
+    max-width: 500px;
+    padding: 24px 28px;
+    font-size: 15.5px;
+    line-height: 1.75;
+    animation: floatText 4.5s ease-in-out infinite;
+}
+
+.bio p {
+    color: #00334d;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+    position: relative;
+    /* above ::before */
+    z-index: 1;
+}
+
+/* ===== Floating Text ===== */
+.floating-text {
+    animation: floatText 4s ease-in-out infinite;
+}
+
+@keyframes floatText {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* ===== Floating Boxes Container ===== */
+.floating-boxes-container {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1000px;
+    margin-bottom: 20px;
+}
+
+/* Floating Box specifics */
+.floating-box {
+    width: 270px;
+    padding: 28px 26px 26px;
+    cursor: default;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.floating-box h3 {
+    margin-bottom: 12px;
+    font-size: 19px;
+    font-weight: 700;
+    color: #004070;
+    letter-spacing: 0.3px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+    position: relative;
+    z-index: 1;
+}
+
+.floating-box p {
+    font-size: 14.5px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: #005080;
+    position: relative;
+    z-index: 1;
+}
+
+/* Animated floating per-box */
+.box-1 {
+    animation: floatBox1 5s ease-in-out infinite, panBox1 8s ease-in-out infinite;
+}
+
+.box-2 {
+    animation: floatBox2 6s ease-in-out infinite, panBox2 9s ease-in-out infinite;
+    animation-delay: 0.5s;
+}
+
+.box-3 {
+    animation: floatBox3 5.5s ease-in-out infinite, panBox3 10s ease-in-out infinite;
+    animation-delay: 1s;
+}
+
+.floating-box:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow:
+        0 2px 0 rgba(255, 255, 255, 0.9) inset,
+        0 -1px 0 rgba(100, 180, 230, 0.4) inset,
+        0 14px 36px rgba(0, 120, 200, 0.35),
+        0 4px 10px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+/* ===== Floating keyframes ===== */
+@keyframes floatBox1 {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-14px);
+    }
+}
+
+@keyframes floatBox2 {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-18px);
+    }
+}
+
+@keyframes floatBox3 {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+@keyframes panBox1 {
+
+    0%,
+    100% {
+        margin-left: 0;
+        margin-top: 0;
+    }
+
+    25% {
+        margin-left: 6px;
+        margin-top: -4px;
+    }
+
+    75% {
+        margin-left: -6px;
+        margin-top: 4px;
+    }
+}
+
+@keyframes panBox2 {
+
+    0%,
+    100% {
+        margin-left: 0;
+        margin-top: 0;
+    }
+
+    25% {
+        margin-left: -5px;
+        margin-top: 5px;
+    }
+
+    75% {
+        margin-left: 5px;
+        margin-top: -5px;
+    }
+}
+
+@keyframes panBox3 {
+
+    0%,
+    100% {
+        margin-left: 0;
+        margin-top: 0;
+    }
+
+    25% {
+        margin-left: 4px;
+        margin-top: 6px;
+    }
+
+    75% {
+        margin-left: -4px;
+        margin-top: -6px;
+    }
+}
+
+/* ===== Gallery Section ===== */
+.folklor-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 70px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Section title */
+.folklor-title {
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    margin-bottom: 24px;
+    color: #003a60;
+    text-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.9),
+        0 0 18px rgba(0, 150, 255, 0.35),
+        0 2px 8px rgba(0, 80, 160, 0.2);
+}
+
+/* ===== Windows 7 Media Player Frame ===== */
+.folklor-gallery-wrapper {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* The "media player window" frame */
+.folklor-gallery {
+    position: relative;
+    width: min(700px, 90vw);
+    border-radius: 16px;
+    overflow: hidden;
+
+    background:
+        linear-gradient(180deg,
+            rgba(255, 255, 255, 0.80) 0%,
+            rgba(255, 255, 255, 0.55) 48%,
+            rgba(160, 218, 255, 0.45) 49%,
+            rgba(100, 190, 255, 0.30) 100%);
+
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-bottom-color: rgba(80, 160, 220, 0.55);
+
+    box-shadow:
+        0 3px 0 rgba(255, 255, 255, 0.95) inset,
+        0 -1px 0 rgba(80, 160, 220, 0.4) inset,
+        0 10px 40px rgba(0, 100, 180, 0.3),
+        0 4px 12px rgba(0, 0, 0, 0.18),
+        0 0 0 1px rgba(255, 255, 255, 0.4);
+}
+
+/* Top shine bar on media frame */
+.folklor-gallery::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 45%;
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.7) 0%,
+            rgba(255, 255, 255, 0.15) 100%);
+    pointer-events: none;
+    z-index: 3;
+    border-radius: 16px 16px 0 0;
+}
+
+/* Slide strip */
+.folklor-slides {
+    display: flex;
+    transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+}
+
+/* Each slide */
+.folklor-slide {
+    flex: 0 0 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    min-height: 420px;
+    background: rgba(0, 30, 60, 0.10);
+}
+
+.folklor-slide img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+}
+
+.folklor-slide img:hover {
+    transform: scale(1.04);
+}
+
+/* ===== Windows 7 Style Nav Buttons ===== */
+.gallery-controls {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.gallery-btn {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    padding: 8px 28px;
+    border-radius: 8px;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: #003050;
+    border: 1.5px solid rgba(255, 255, 255, 0.75);
+    border-bottom-color: rgba(80, 160, 220, 0.55);
+    user-select: none;
+
+    /* W7 glass button */
+    background:
+        linear-gradient(180deg,
+            rgba(255, 255, 255, 0.90) 0%,
+            rgba(255, 255, 255, 0.65) 48%,
+            rgba(180, 225, 255, 0.55) 49%,
+            rgba(120, 200, 255, 0.45) 100%);
+
+    box-shadow:
+        0 2px 0 rgba(255, 255, 255, 0.95) inset,
+        0 -1px 0 rgba(80, 160, 220, 0.35) inset,
+        0 4px 12px rgba(0, 100, 200, 0.2),
+        0 1px 3px rgba(0, 0, 0, 0.12);
+
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+/* Button top shine */
+.gallery-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.75) 0%,
+            rgba(255, 255, 255, 0.15) 100%);
+    border-radius: 8px 8px 0 0;
+    pointer-events: none;
+}
+
+.gallery-btn:hover {
+    filter: brightness(1.08) saturate(1.2);
+    box-shadow:
+        0 2px 0 rgba(255, 255, 255, 0.95) inset,
+        0 -1px 0 rgba(80, 160, 220, 0.35) inset,
+        0 6px 18px rgba(0, 120, 220, 0.35),
+        0 2px 5px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.gallery-btn:active {
+    transform: translateY(1px);
+    filter: brightness(0.95);
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.6) inset,
+        0 6px 16px rgba(0, 100, 180, 0.18),
+        0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Dot indicators */
+.gallery-dots {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.gallery-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(0, 100, 180, 0.25);
+    border: 1.5px solid rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.gallery-dot.active {
+    background: rgba(0, 140, 220, 0.75);
+    transform: scale(1.3);
+    box-shadow: 0 0 6px rgba(0, 170, 255, 0.6);
+}
