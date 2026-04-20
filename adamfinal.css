@@ -36,7 +36,7 @@ body {
     overflow-x: hidden;
 
     /* Frutiger Aero nature-sky gradient background */
-    background: url('images/landscape-bg.j') no-repeat center center fixed;
+    background: url('images/landscape-bg.jpg.jpg') no-repeat center center fixed;
     background-size: cover;
 
     display: flex;
